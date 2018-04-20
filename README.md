@@ -13,5 +13,4 @@ Create a Folder -> aws-automation and download all the code from here.
 
 Use this coe for run the ansible playbook
 
- "ansible-playbook -i env/hosts aws.yml"
-
+ #ansible-playbook -i env/hosts aws.yml
