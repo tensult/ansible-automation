@@ -1,0 +1,14 @@
+ec2:
+    region: ap-south-1
+    credentials: jawad_test
+    image: ami-7c87d913
+    sg: sg_jawad
+    instance_type: t2.micro
+    subnet: subnet-b135c3fd
+    public_ip: yes
+    tags:
+        Name: jawad_ec2
+    volumes:
+        - device_name: /dev/sda
+          volume_type: standard
+          volume_size: 10
