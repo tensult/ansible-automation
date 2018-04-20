@@ -9,5 +9,9 @@ Requirements:
 3. install boto
 4. Configure aws-cli and configure aws credentials
 
+Create a Folder -> aws-automation and download all the code from here.
 
+Use this coe for run the ansible playbook
+
+ "ansible-playbook -i env/hosts aws.yml"
 
