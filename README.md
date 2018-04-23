@@ -1,4 +1,4 @@
-# ansible-automation-AWS
+# ansible-automation
 
   Ansible is an open-source IT automation engine, it improve the scalability, consistency, and reliability of your IT environment.
   By using Ansible, we can manage whole the services of the AWS. Here a simple way to launch a EC2 instance by using ansible code
