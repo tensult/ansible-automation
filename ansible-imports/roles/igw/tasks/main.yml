@@ -1,0 +1,9 @@
+---
+- name: creating internet gateway
+  ec2_vpc_igw:
+    region: ap-south-1
+    vpc_id: "{{ vpc.vpc.id }}"
+    state: present
+    tags:
+      Name: igw
+  register: igw

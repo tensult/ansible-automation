@@ -1,0 +1,6 @@
+---
+- import_playbook : vpc.yml
+- import_playbook : igw.yml
+- import_playbook : subnet.yml
+- import_playbook : routetable.yml
+- import_playbook : response.yml

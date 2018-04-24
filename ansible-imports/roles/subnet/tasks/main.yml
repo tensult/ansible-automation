@@ -1,0 +1,73 @@
+---
+- name: Creating ELB1 subnet 
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1a
+        cidr: 10.0.0.0/24
+        resource_tags: { "Name":"ELB1" , "Environment":"test" }
+  register: ELB1_subnet 
+
+- name: Creating NATgateway subnet 
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1a
+        cidr: 10.0.1.0/24
+        resource_tags: { "Name":"NAT-ap-south-1a" , "Environment":"test" }
+  register: ELB1_subnet 
+
+- name: Creating application1 subnet 
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1a
+        cidr: 10.0.2.0/24
+        resource_tags: { "Name":"APP1" , "Environment":"test" }
+  register: application1_subnet
+
+- name: Creating database1 subnet
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1a
+        cidr: 10.0.3.0/24
+        resource_tags: { "Name":"DataBase1" , "Environment":"test" }
+  register: database1_subnet
+
+- name: Creating ELB2 subnet
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1b
+        cidr: 10.0.4.0/24
+        resource_tags: { "Name":"ELB2" , "Environment":"test" }
+  register: ELB2_subnet
+
+- name: Creating NATgateway subnet 
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1b
+        cidr: 10.0.5.0/24
+        resource_tags: { "Name":"NAT-ap-south-1b" , "Environment":"test" }
+  register: ELB1_subnet 
+
+- name: Creating application2 subnet
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1b
+        cidr: 10.0.6.0/24
+        resource_tags: { "Name":"APP2" , "Environment":"test" }
+  register: application2_subnet         
+
+
+- name: Creating database2 subnet
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: ap-south-1b
+        cidr: 10.0.7.0/24
+        resource_tags: { "Name":"DataBase2" , "Environment":"test" }
+  register: database2_subnet

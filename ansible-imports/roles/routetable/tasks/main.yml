@@ -1,0 +1,44 @@
+---
+- name: Creating ELB route table
+  ec2_vpc_route_table:
+      vpc_id: "{{ ELB1_subnet.subnet.vpc_id }}"
+      region: ap-south-1
+      tags: 
+       Name: ELB_routetable
+      subnets: 
+        - "{{ ELB1_subnet.subnet.id }}"  
+        - "{{ ELB2_subnet.subnet.id }}" 
+      routes:
+        - dest: 0.0.0.0/0
+          gateway_id: "{{ igw.gateway_id }}"
+  register: public_routetable_ELB
+
+- name: Creating application route table
+  ec2_vpc_route_table:
+      vpc_id: "{{ application1_subnet.subnet.vpc_id }}"
+      region: ap-south-1
+      tags: 
+       Name: application_routetable
+      subnets:
+        - "{{ application1_subnet.subnet.id }}"
+        - "{{ application2_subnet.subnet.id }}" 
+      routes:
+      - dest: 0.0.0.0/0
+        instance_id: "{{ igw.gateway_id }}" 
+  register: private_routetable_app
+
+- name: Creating database route table
+  ec2_vpc_route_table:
+      vpc_id: "{{ application1_subnet.subnet.vpc_id }}"
+      region: ap-south-1
+      tags: 
+       Name: databse_routetable
+      subnets:  
+        - "{{ database1_subnet.subnet.id }}"
+        - "{{ database2_subnet.subnet.id }}" 
+      routes:
+      - dest: 0.0.0.0/0
+        instance_id: "{{ igw.gateway_id }}" 
+  register: private_routetable_DB
+
+
