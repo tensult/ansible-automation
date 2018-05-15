@@ -1,73 +1,64 @@
 ---
-- name: Creating ELB1 subnet 
-  ec2_vpc_subnet:
-        state: present
-        vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1a
-        cidr: 10.0.0.0/24
-        resource_tags: { "Name":"ELB1" , "Environment":"test" }
-  register: ELB1_subnet 
 
-- name: Creating NATgateway subnet 
+- name: Creating web server 1 subnet 
   ec2_vpc_subnet:
         state: present
         vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1a
-        cidr: 10.0.1.0/24
-        resource_tags: { "Name":"NAT-ap-south-1a" , "Environment":"test" }
-  register: ELB1_subnet 
+        az: "{{wb1_az}}"
+        cidr: "{{web_server1}}"
+        resource_tags: { "Name":"{{wb1_name}}" , "Environment":"{{wb1_env}}" }
+  register: web1_subnet
 
-- name: Creating application1 subnet 
+- name: Creating public subnet for loadbalancer 1
   ec2_vpc_subnet:
         state: present
         vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1a
-        cidr: 10.0.2.0/24
-        resource_tags: { "Name":"APP1" , "Environment":"test" }
+        az: "{{wb1_az}}"
+        cidr: "{{lb1_subnet}}"
+        resource_tags: { "Name":"{{lbsubnet1_name}}" , "Environment":"{{lbsubnet1_env}}" }
+  register: lb1_subnet
+
+- name: Creating web server 2 subnet 
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: "{{wb2_az}}"
+        cidr: "{{web_server2}}"
+        resource_tags: { "Name":"{{wb2_name}}" , "Environment":"{{wb2_env}}" }
+  register: web2_subnet
+
+- name: Creating public subnet for loadbalancer 2
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: "{{wb2_az}}"
+        cidr: "{{lb2_subnet}}"
+        resource_tags: { "Name":"{{lbsubnet2_name}}" , "Environment":"{{lbsubnet2_env}}" }
+  register: lb2_subnet
+
+- name: Creating application server 1 subnet 
+  ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        az: "{{app1_az}}"
+        cidr: "{{app_server1}}"
+        resource_tags: { "Name":"{{app1_name}}" , "Environment":"{{app1_env}}" }
   register: application1_subnet
 
-- name: Creating database1 subnet
+- name: Creating application server 2 subnet
   ec2_vpc_subnet:
         state: present
         vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1a
-        cidr: 10.0.3.0/24
-        resource_tags: { "Name":"DataBase1" , "Environment":"test" }
-  register: database1_subnet
-
-- name: Creating ELB2 subnet
-  ec2_vpc_subnet:
-        state: present
-        vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1b
-        cidr: 10.0.4.0/24
-        resource_tags: { "Name":"ELB2" , "Environment":"test" }
-  register: ELB2_subnet
-
-- name: Creating NATgateway subnet 
-  ec2_vpc_subnet:
-        state: present
-        vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1b
-        cidr: 10.0.5.0/24
-        resource_tags: { "Name":"NAT-ap-south-1b" , "Environment":"test" }
-  register: ELB1_subnet 
-
-- name: Creating application2 subnet
-  ec2_vpc_subnet:
-        state: present
-        vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1b
-        cidr: 10.0.6.0/24
-        resource_tags: { "Name":"APP2" , "Environment":"test" }
+        az: "{{app2_az}}"
+        cidr: "{{app_server2}}"
+        resource_tags: { "Name":"{{app2_name}}" , "Environment":"{{app2_env}}" }
   register: application2_subnet         
 
-
-- name: Creating database2 subnet
+- name: Creating database subnet
   ec2_vpc_subnet:
         state: present
         vpc_id: "{{ vpc.vpc.id }}"
-        az: ap-south-1b
-        cidr: 10.0.7.0/24
-        resource_tags: { "Name":"DataBase2" , "Environment":"test" }
-  register: database2_subnet
+        az: "{{db_az}}"
+        cidr: "{{db_server}}"
+        resource_tags: { "Name":"{{db_name}}" , "Environment":"{{db_env}}" }
+  register: database1_subnet

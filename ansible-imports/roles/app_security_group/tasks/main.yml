@@ -1,0 +1,14 @@
+---
+- name: Creating app security group
+  ec2_group:
+    name: "{{app_sg_name}}"
+    tags: { "Name":"{{app_sg_name}}" }
+    description: "{{app_sg_desc}}"
+    vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
+    region: "{{region}}"
+    rules:
+      - proto: "{{app_protocol}}"
+        ports:
+        - "{{app_port_no}}"
+        cidr_ip: "{{app_source_cidr}}"
+        rule_desc: "{{app_sg_rule_desc}}"

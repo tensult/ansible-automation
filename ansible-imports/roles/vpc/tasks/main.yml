@@ -1,10 +1,10 @@
 ---
 - name: Creating VPC
   ec2_vpc_net:
-          name: My_vpc
-          region: ap-south-1
+          name: "{{vpc_name}}"
+          region: "{{region}}"
           state: present
-          cidr_block: 10.0.0.0/16
-          resource_tags: { "Environment":"testing" }
+          cidr_block: "{{vpc_id}}"
+          resource_tags: { "Environment":"{{tag_env}}" }
   register: vpc
  

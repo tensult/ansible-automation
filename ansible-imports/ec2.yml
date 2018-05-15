@@ -1,0 +1,77 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "key_pair1"
+      prompt: "Enter the name of your keypair"
+      private: no
+    - name: "instance_name1"
+      prompt: "Enter the name of the web server 1"
+      private: no
+    - name: "ec2_type1"
+      prompt: "Enter the type of instance you want "
+      private: no
+    - name: "sg1"
+      prompt: "Enter the name of the security group"
+      private: no
+    - name: "public_ip1"
+      prompt: "Do you want public IP for web server 1"
+      private: no
+    - name: "instance_name2"
+      prompt: "Enter the name of the web server 2"
+      private: no
+    - name: "ec2_type2"
+      prompt: "Enter the type of instance you want "
+      private: no
+    - name: "sg2"
+      prompt: "Enter the name of the security group"
+      private: no
+    - name: "public_ip2"
+      prompt: "Do you want public IP for web server 2"
+      private: no
+    - name: "instance_name3"
+      prompt: "Enter the name of the application server 1"
+      private: no
+    - name: "ec2_type3"
+      prompt: "Enter the type of instance you want "
+      private: no
+    - name: "sg3"
+      prompt: "Enter the name of the security group"
+      private: no
+    - name: "public_ip3"
+      prompt: "Do you want public IP for application server 1"
+      private: no
+    - name: "instance_name4"
+      prompt: "Enter the name of the application server 2"
+      private: no
+    - name: "ec2_type4"
+      prompt: "Enter the type of instance you want "
+      private: no
+    - name: "sg4"
+      prompt: "Enter the name of the security group"
+      private: no
+    - name: "public_ip4"
+      prompt: "Do you want public IP for application server 2"
+      private: no
+        
+  tasks:
+    - set_fact:
+        key_pair1: "{{key_pair1}}"
+        instance_name1: "{{instance_name1}}"
+        ec2_type1: "{{ec2_type1}}"
+        sg1: "{{sg1}}"
+        public_ip1: "{{public_ip1}}"
+        instance_name2: "{{instance_name2}}"
+        ec2_type2: "{{ec2_type2}}"
+        sg2: "{{sg2}}"
+        public_ip2: "{{public_ip2}}"
+        instance_name3: "{{instance_name3}}"
+        ec2_type3: "{{ec2_type3}}"
+        sg3: "{{sg3}}"
+        public_ip3: "{{public_ip3}}"
+        instance_name4: "{{instance_name4}}"
+        ec2_type4: "{{ec2_type4}}"
+        sg4: "{{sg4}}"
+        public_ip4: "{{public_ip4}}"
+  
+  roles:
+     - ec2

@@ -1,0 +1,15 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "group_name"
+      prompt: "Enter the name of the RDS subnet group"
+      private: no
+    - name: "group_description"
+      prompt: "Enter the description of the group"
+      private: no
+  tasks:
+    - set_fact:
+        group_name: "{{group_name}}"
+        group_description: "{{group_description}}"
+  roles:
+     - rds_subnet_group

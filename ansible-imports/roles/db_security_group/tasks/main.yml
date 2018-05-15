@@ -1,0 +1,15 @@
+---
+- name: Creating DB security group  
+  ec2_group:
+    name: "{{db_sg_name}}"
+    tags: { "Name":"{{db_sg_name}}" }
+    description: "{{db_sg_desc}}"
+    vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
+    region: "{{region}}"
+    rules:
+      - proto: "{{db_protocol}}"
+        ports:
+        - "{{db_port_no}}"
+        cidr_ip: "{{db_source_cidr}}"
+        rule_desc: "{{db_sg_rule_desc}}"
+  

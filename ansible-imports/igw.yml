@@ -1,4 +1,13 @@
 ---
 - hosts: local
+  vars_prompt:
+    - name: "igw_name"
+      prompt: "Enter the name of the IGW"
+      private: no
+  
+  tasks:
+    - set_fact:
+        igw_name: "{{igw_name}}"
+        
   roles:
      - igw

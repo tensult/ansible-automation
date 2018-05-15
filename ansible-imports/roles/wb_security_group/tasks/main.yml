@@ -1,0 +1,17 @@
+---
+- name: Creating web security group
+
+  ec2_group:
+    name: "{{wb_sg_name}}"
+    tags: { "Name":"{{wb_sg_name}}" }
+    description: "{{wb_sg_desc}}"
+    vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
+    region: "{{region}}"
+    rules:
+      - proto: TCP
+        ports:
+        - 80
+        - 443
+        cidr_ip: 0.0.0.0/0
+        rule_desc: Allow HHTP and HTTPS
+  register: web_sg

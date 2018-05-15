@@ -1,5 +1,0 @@
----
-- name: create a new elastic IP 
-  ec2_eip:
-    state: present
-  register: eip

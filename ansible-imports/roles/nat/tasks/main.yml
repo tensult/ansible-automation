@@ -1,9 +1,9 @@
 ---
-- name: Create new nat gateway and allocate new EIP if a nat gateway does not yet exist in the subnet.
+- name: Create new NAT gateway
   ec2_vpc_nat_gateway:
     state: present
-    subnet_id: 
+    subnet_id: "{{ lb1_subnet.subnet.id }}"
     wait: yes
-    region: ap-south
+    region: "{{region}}"
     if_exist_do_not_create: true
   register: new_nat_gateway

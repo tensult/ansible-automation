@@ -1,4 +1,110 @@
 ---
 - hosts: local
+  vars_prompt:
+    - name: "web_server1"
+      prompt: "Enter the CIDR block you want for web server 1"
+      private: no
+    - name: "wb1_name"
+      prompt: "Enter the name of the web server 1"
+      private: no
+    - name: "wb1_env"
+      prompt: "Enter the environment tag of web server 1"
+      private: no
+    - name: "wb1_az"
+      prompt: "Enter the availability zone of web server 1"
+      private: no
+    - name: "lb1_subnet"
+      prompt: "Enter the CIDR block you want for load balancer 1 subnet"
+      private: no
+    - name: "lbsubnet1_name"
+      prompt: "Enter the name of the load balancer subnet 1"
+      private: no
+    - name: "lbsubnet1_env"
+      prompt: "Enter the environment tag of load balancer subnet 1"
+      private: no
+    - name: "web_server2"
+      prompt: "Enter the CIDR block you want for web server 2"
+      private: no
+    - name: "wb2_name"
+      prompt: "Enter the name of the web server 2"
+      private: no
+    - name: "wb2_env"
+      prompt: "Enter the environment tag of web server 2"
+      private: no
+    - name: "wb2_az"
+      prompt: "Enter the availability zone of web server 2"
+      private: no
+    - name: "lb2_subnet"
+      prompt: "Enter the CIDR block you want for load balancer 2 subnet"
+      private: no
+    - name: "lbsubnet2_name"
+      prompt: "Enter the name of the load balancer subnet 2"
+      private: no
+    - name: "lbsubnet2_env"
+      prompt: "Enter the environment tag of load balancer subnet 2"
+      private: no
+    - name: "app_server1"
+      prompt: "Enter the CIDR block you want for application server 1"
+      private: no
+    - name: "app1_name"
+      prompt: "Enter the name of the application server 1"
+      private: no
+    - name: "app1_env"
+      prompt: "Enter the environment tag of application server 1"
+      private: no
+    - name: "app1_az"
+      prompt: "Enter the availability zone of application server 1"
+      private: no
+    - name: "app_server2"
+      prompt: "Enter the CIDR block you want for application server 2"
+      private: no
+    - name: "app2_name"
+      prompt: "Enter the name of the application server 2"
+      private: no
+    - name: "app2_env"
+      prompt: "Enter the environment tag of application server 2"
+      private: no
+    - name: "app2_az"
+      prompt: "Enter the availability zone of application server 2"
+      private: no
+    - name: "db_server"
+      prompt: "Enter the CIDR block you want for database server"
+      private: no
+    - name: "db_name"
+      prompt: "Enter the name of the database server"
+      private: no
+    - name: "db_env"
+      prompt: "Enter the environment tag of database server"
+      private: no
+    - name: "db_az"
+      prompt: "Enter the availability zone of database server"
+      private: no
+  tasks:
+    - set_fact:
+        web_server1: "{{web_server1}}"
+        wb1_name: "{{wb1_name}}"
+        wb1_env: "{{wb1_env}}"
+        wb1_az: "{{wb1_az}}"
+        web_server2: "{{web_server2}}"
+        wb2_name: "{{wb2_name}}"
+        wb2_env: "{{wb2_env}}"
+        wb2_az: "{{wb2_az}}"
+        app_server1: "{{app_server1}}"
+        app1_name: "{{app1_name}}"
+        app1_env: "{{app1_env}}"
+        app1_az: "{{app1_az}}"
+        app_server2: "{{app_server2}}"
+        app2_name: "{{app2_name}}"
+        app2_env: "{{app2_env}}"
+        app2_az: "{{app2_az}}"
+        db_server: "{{db_server}}"
+        db_name: "{{db_name}}"
+        db_env: "{{db_env}}"
+        db_az: "{{db_az}}"
+        lb1_subnet: "{{lb1_subnet}}"
+        lbsubnet1_name: "{{lbsubnet1_name}}"
+        lbsubnet1_env: "{{lbsubnet1_env}}"
+
+
   roles:
      - subnet
