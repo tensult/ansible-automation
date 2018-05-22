@@ -1,0 +1,14 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "vpn_name1"
+      prompt: "Enter the name of the VPN"
+      private: no
+
+  tasks:
+    - name: Creating VPN connection
+      include_role: 
+        name: ../roles/vpn_connection
+      vars:
+        vpnname: "{{vpn_name1}}"
+  

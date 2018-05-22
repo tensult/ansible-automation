@@ -1,0 +1,30 @@
+---
+- hosts: local
+  name: Creating web server 2 subnet
+  vars_prompt:
+    - name: "cidr_block_subnet2"
+      prompt: "Enter the CIDR block you want for web server 2 subnet"
+      private: no
+    - name: "subnet_name2"
+      prompt: "Enter the name of the web server 2 subnet"
+      private: no
+    - name: "subnet_env2"
+      prompt: "Enter the environment tag of web server 2 subnet"
+      private: no
+    - name: "subnet_az2"
+      prompt: "Enter the availability zone of web server 2 subnet"
+      private: no
+
+  tasks:
+    - name: Creating web server 2 subnet
+      include_role: 
+        name: ../roles/subnet
+      vars:
+        cidr_block: "{{cidr_block_subnet2}}"
+        subnet_name: "{{subnet_name2}}"
+        subnet_env: "{{subnet_env2}}"
+        subnet_az: "{{subnet_az2}}"
+        subnet_key: web2_subnet
+    - name: Print output
+      debug: 
+        var: vpc_info

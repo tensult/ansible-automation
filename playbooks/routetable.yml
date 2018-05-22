@@ -1,0 +1,5 @@
+---
+- import_playbook : app_routetable.yml
+- import_playbook : db_routetable.yml
+- import_playbook : lb_routetable.yml
+- import_playbook : web_routetable.yml

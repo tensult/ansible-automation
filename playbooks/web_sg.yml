@@ -1,0 +1,21 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "wb_sg_name"
+      prompt: "Enter the name of the security group for web layer"
+      private: no
+    - name: "wb_sg_desc"
+      prompt: "Enter the description of the security group for web layer"
+      private: no
+    - name: "wb_sg_rule_desc"
+      prompt: "Enter the rule description "
+      private: no
+
+  tasks:
+    - set_fact:
+         wb_sg_name: "{{wb_sg_name}}"
+         wb_sg_desc: "{{wb_sg_desc}}"
+         wb_sg_rule_desc: "{{wb_sg_rule_desc}}"
+           
+  roles:
+     - ../roles/wb_security_group

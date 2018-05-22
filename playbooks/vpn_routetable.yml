@@ -1,0 +1,24 @@
+---
+- hosts: local
+  name: Creating routetable for VGW configuration
+  vars_prompt:
+    - name: "vgwrt_name1"
+      prompt: "Enter the name of the routetable"
+      private: no
+    - name: "vgwdestination1"
+      prompt: "Enter the destination of the routetable"
+      private: no
+
+  tasks:
+    - name: Creating routetable for VGW configuration
+      include_role: 
+        name: ../roles/vpn_routetable
+      vars:
+        vgwrtname: "{{vgwrt_name1}}"
+        vgwdestination: "{{vgwdestination1}}"
+        vgwsubnet1_id: "{{ vpc_info.web1_subnet.subnet.id }}"
+        vgwsubnet2_id: "{{ vpc_info.web2_subnet.subnet.id }}" 
+
+    - name: Print output
+      debug: 
+        var: vpc_info

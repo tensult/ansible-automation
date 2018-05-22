@@ -1,0 +1,24 @@
+---
+- hosts: local
+  name: Creating web routetable
+  vars_prompt:
+    - name: "rt3_name"
+      prompt: "Enter the name of the routetable"
+      private: no
+    - name: "destination3"
+      prompt: "Enter the destination of the routetable"
+      private: no
+
+  tasks:
+    - name: Creating web routetable
+      include_role: 
+        name: ../roles/routetable
+      vars:
+        rt_name: "{{rt3_name}}"
+        destination: "{{destination3}}"
+        subnet1_id: "{{ vpc_info.web1_subnet.subnet.id }}"
+        subnet2_id: "{{ vpc_info.web2_subnet.subnet.id }}" 
+        gateway_id: "{{ new_nat_gateway.nat_gateway_id }}" 
+    - name: Print output
+      debug: 
+        var: vpc_info

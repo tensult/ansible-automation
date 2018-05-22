@@ -2,9 +2,10 @@
 - name: Creating RDS Subnet groups
   rds_subnet_group:
     state: present
-    name: "{{group_name}}"
-    description: "{{group_description}}"
-    region: ap-south-1
+    name: "{{rds_group_name}}"
+    description: "{{rds_group_description}}"
+    region: "{{region}}"
     subnets:
-      - "{{ database1_subnet.subnet.id }}"     
+      - "{{ vpc_info.db1_subnet.subnet.id }}" 
+      - "{{ vpc_info.db2_subnet.subnet.id }}"     
  

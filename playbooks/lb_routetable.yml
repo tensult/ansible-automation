@@ -1,0 +1,24 @@
+---
+- hosts: local
+  name: Creating lb routetable
+  vars_prompt:
+    - name: "rt4_name"
+      prompt: "Enter the name of the routetable"
+      private: no
+    - name: "destination4"
+      prompt: "Enter the destination of the routetable"
+      private: no
+
+  tasks:
+    - name: Creating lb routetable
+      include_role: 
+        name: ../roles/routetable
+      vars:
+        rt_name: "{{rt4_name}}"
+        destination: "{{destination4}}"
+        subnet1_id: "{{ vpc_info.lb1_subnet.subnet.id }}"
+        subnet2_id: "{{ vpc_info.lb2_subnet.subnet.id }}" 
+        gateway_id: "{{ igw.gateway_id }}" 
+    - name: Print output
+      debug: 
+        var: vpc_info

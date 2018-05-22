@@ -4,7 +4,7 @@
     name: "{{db_sg_name}}"
     tags: { "Name":"{{db_sg_name}}" }
     description: "{{db_sg_desc}}"
-    vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
+    vpc_id: "{{ vpc.vpc.id }}"
     region: "{{region}}"
     rules:
       - proto: "{{db_protocol}}"

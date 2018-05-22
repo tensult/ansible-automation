@@ -1,0 +1,11 @@
+---
+
+- name: Creating Virtual Private Gateway
+  ec2_vpc_vgw:
+    state: present
+    region: "{{region}}"
+    vpc_id: "{{ vpc.vpc.id }}"
+    name: "{{vgw_name}}"
+    type: ipsec.1
+  register: vgw
+

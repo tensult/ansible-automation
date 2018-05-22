@@ -1,0 +1,30 @@
+---
+- hosts: local
+  name: Creating lb server 2 subnet
+  vars_prompt:
+    - name: "cidr_block_subnet8"
+      prompt: "Enter the CIDR block you want for lb server 2 subnet"
+      private: no
+    - name: "subnet_name8"
+      prompt: "Enter the name of the lb server 2 subnet"
+      private: no
+    - name: "subnet_env8"
+      prompt: "Enter the environment tag of lb server 2 subnet"
+      private: no
+    - name: "subnet_az8"
+      prompt: "Enter the availability zone of lb server 2 subnet"
+      private: no
+
+  tasks:
+    - name: Creating lb server 2 subnet
+      include_role: 
+        name: ../roles/subnet
+      vars:
+        cidr_block: "{{cidr_block_subnet8}}"
+        subnet_name: "{{subnet_name8}}"
+        subnet_env: "{{subnet_env8}}"
+        subnet_az: "{{subnet_az8}}"
+        subnet_key: lb2_subnet
+    - name: Print output
+      debug: 
+        var: vpc_info

@@ -1,0 +1,14 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "vgw_name"
+      prompt: "Enter the name of the virtual private gateway"
+      private: no
+
+  tasks:
+    - set_fact:
+        vgw_name: "{{vgw_name}}"
+
+  roles:
+       - ../roles/vgw
+  

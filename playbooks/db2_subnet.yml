@@ -1,0 +1,30 @@
+---
+- hosts: local
+  name: Creating db server 2 subnet
+  vars_prompt:
+    - name: "cidr_block_subnet6"
+      prompt: "Enter the CIDR block you want for db server 2 subnet"
+      private: no
+    - name: "subnet_name6"
+      prompt: "Enter the name of the db server 2 subnet"
+      private: no
+    - name: "subnet_env6"
+      prompt: "Enter the environment tag of db server 2 subnet"
+      private: no
+    - name: "subnet_az6"
+      prompt: "Enter the availability zone of db server 2 subnet"
+      private: no
+
+  tasks:
+    - name: Creating db server 2 subnet
+      include_role: 
+        name: ../roles/subnet
+      vars:
+        cidr_block: "{{cidr_block_subnet6}}"
+        subnet_name: "{{subnet_name6}}"
+        subnet_env: "{{subnet_env6}}"
+        subnet_az: "{{subnet_az6}}"
+        subnet_key: db2_subnet
+    - name: Print output
+      debug: 
+        var: vpc_info

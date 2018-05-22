@@ -1,0 +1,14 @@
+---
+- import_playbook : playbooks/vpc.yml
+- import_playbook : playbooks/igw.yml
+- import_playbook : playbooks/subnet.yml
+- import_playbook : playbooks/nat.yml
+- import_playbook : playbooks/routetable.yml
+- import_playbook : playbooks/rds_subnet_group.yml
+- import_playbook : playbooks/rds.yml
+- import_playbook : playbooks/security_group.yml
+- import_playbook : playbooks/ec2.yml
+- import_playbook : playbooks/app_lb.yml
+- import_playbook : vpn_setup.yml
+
+

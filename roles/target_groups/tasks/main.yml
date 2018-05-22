@@ -1,0 +1,13 @@
+---
+- name: Creating target groups
+  elb_target_group:
+    name: applbgroup
+    protocol: http
+    port: 80
+    vpc_id: "{{ vpc.vpc.id }}"
+    targets:
+      - Id: "{{ vpc_info.webserver1.instance_ids[0]}}"
+        Port: 80
+      - Id: "{{ vpc_info.webserver2.instance_ids[0]}}"
+        Port: 80
+    state: present

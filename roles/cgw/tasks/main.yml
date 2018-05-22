@@ -1,0 +1,12 @@
+---
+
+- name: Creating Customer Gateway
+  ec2_customer_gateway:
+    state: present
+    name: "{{cgw_name}}"
+    region: "{{region}}"
+    routing: static
+    ip_address: "{{ip_add}}"
+
+  register: cgw
+

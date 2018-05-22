@@ -1,0 +1,33 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "app_sg_name"
+      prompt: "Enter the name of the security group for application layer"
+      private: no
+    - name: "app_sg_desc"
+      prompt: "Enter the description of the security group for application layer"
+      private: no
+    - name: "app_sg_rule_desc"
+      prompt: "Enter the rule description "
+      private: no
+    - name: "app_protocol"
+      prompt: "Enter the protocol for application layer "
+      private: no
+    - name: "app_port_no"
+      prompt: "Enter the port number for application layer"
+      private: no
+    - name: "app_source_cidr"
+      prompt: "Enter the source CIDR block for application layer"
+      private: no
+
+  tasks:
+    - set_fact:
+         app_sg_name: "{{app_sg_name}}"
+         app_sg_desc: "{{app_sg_desc}}"
+         app_sg_rule_desc: "{{app_sg_rule_desc}}"
+         app_protocol: "{{app_protocol}}"
+         app_port_no: "{{app_port_no}}"
+         app_source_cidr: "{{app_source_cidr}}"
+         
+  roles:
+     - ../roles/app_security_group

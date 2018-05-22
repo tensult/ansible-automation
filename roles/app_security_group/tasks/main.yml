@@ -4,7 +4,7 @@
     name: "{{app_sg_name}}"
     tags: { "Name":"{{app_sg_name}}" }
     description: "{{app_sg_desc}}"
-    vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
+    vpc_id: "{{ vpc.vpc.id }}"
     region: "{{region}}"
     rules:
       - proto: "{{app_protocol}}"

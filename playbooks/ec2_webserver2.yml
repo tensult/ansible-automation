@@ -1,0 +1,34 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "instance_name2"
+      prompt: "Enter the name of the web server 2"
+      private: no
+    - name: "ec2_type2"
+      prompt: "Enter the type of instance you want "
+      private: no
+    - name: "sg2"
+      prompt: "Enter the name of the security group"
+      private: no
+    - name: "public_ip2"
+      prompt: "Do you want public IP for web server 2"
+      private: no
+    - name: "ec2_image2"
+      prompt: "Enter image of your EC2 instance"
+      private: no 
+
+  tasks:
+    - name: Creating web server 2
+      include_role: 
+        name: ../roles/ec2
+      vars:
+        instance_name: "{{instance_name2}}"
+        ec2_type: "{{ec2_type2}}"
+        sg: "{{sg2}}"
+        public_ip: "{{public_ip2}}"
+        ec2_subnet_id: "{{ vpc_info.web2_subnet.subnet.id }}"
+        ec2_name: webserver2
+        ec2_image: "{{ec2_image2}}"
+    - name: Print output
+      debug: 
+        var: vpc_info

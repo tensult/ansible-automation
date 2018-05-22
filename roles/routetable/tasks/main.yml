@@ -1,57 +1,16 @@
 ---
-- name: Creating web server route table
+- name: Creating {{rt_name}} route table
   ec2_vpc_route_table:
-      vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
+      vpc_id: "{{ vpc.vpc.id }}"
       region: "{{region}}"
       tags: 
-       Name: web_routetable
+       Name: "{{rt_name}}"
       subnets:
-        - "{{ web1_subnet.subnet.id }}"
-        - "{{ web2_subnet.subnet.id }}" 
+        - "{{ subnet1_id }}"
+        - "{{ subnet2_id }}" 
       routes:
-      - dest: 0.0.0.0/0
-        gateway_id: "{{ new_nat_gateway.nat_gateway_id }}" 
-  register: public_routetable_web
-
-- name: Creating load balancer route table
-  ec2_vpc_route_table:
-      vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
-      region: "{{region}}"
-      tags: 
-       Name: lb_routetable
-      subnets:
-        - "{{ lb1_subnet.subnet.id }}"
-        - "{{ lb2_subnet.subnet.id }}" 
-      routes:
-      - dest: 0.0.0.0/0
-        gateway_id: "{{ igw.gateway_id }}" 
-  register: public_routetable_web
-
-- name: Creating app server route table
-  ec2_vpc_route_table:
-      vpc_id: "{{ application1_subnet.subnet.vpc_id }}"
-      region: "{{region}}"
-      tags: 
-       Name: app_routetable
-      subnets:
-        - "{{ application1_subnet.subnet.id }}"
-        - "{{ application2_subnet.subnet.id }}" 
-      routes:
-      - dest: 0.0.0.0/0
-        gateway_id: "{{ new_nat_gateway.nat_gateway_id }}" 
-  register: private_routetable_app
-
-- name: Creating database route table
-  ec2_vpc_route_table:
-      vpc_id: "{{ database1_subnet.subnet.vpc_id }}"
-      region: "{{region}}"
-      tags: 
-       Name: databse_routetable
-      subnets:  
-        - "{{ database1_subnet.subnet.id }}" 
-      routes:
-      - dest: 0.0.0.0/0
-        gateway_id: "{{ new_nat_gateway.nat_gateway_id }}" 
-  register: private_routetable_DB
-
-
+      - dest: "{{destination}}"
+        gateway_id: "{{ gateway_id }}" 
+  register: routetable_info
+- set_fact:
+    vpc_info: "{{ vpc_info | combine({ rt_name: routetable_info}) }}"

@@ -1,0 +1,12 @@
+---
+- name: Creating Virtual Private Network connection
+  ec2_vpc_vpn:
+    state: present
+    vpn_gateway_id: "{{vgw.vgw.id}}"
+    customer_gateway_id: "{{cgw.gateway.customer_gateway.customer_gateway_id}}"
+    static_only: yes
+    routes:
+      - 0.0.0.0/0
+    tags:
+      Name: "{{vpnname}}"
+

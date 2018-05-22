@@ -4,7 +4,7 @@
           name: "{{vpc_name}}"
           region: "{{region}}"
           state: present
-          cidr_block: "{{vpc_id}}"
+          cidr_block: "{{cidr_block}}"
           resource_tags: { "Environment":"{{tag_env}}" }
   register: vpc
  

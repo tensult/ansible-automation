@@ -1,0 +1,13 @@
+- name: Set up route table
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{region}}"
+    tags:
+      Name: "{{vgwrtname}}"
+    subnets:
+      - "{{ vgwsubnet1_id }}"
+      - "{{ vgwsubnet2_id }}"
+    propagating_vgw_ids: "{{vgw.vgw.id}}"
+    routes:
+      - dest: "{{vgwdestination}}"
+        gateway_id: "{{vgw.vgw.id}}"

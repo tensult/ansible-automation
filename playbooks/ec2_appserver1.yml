@@ -1,0 +1,34 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "instance_name3"
+      prompt: "Enter the name of the app server 1"
+      private: no
+    - name: "ec2_type3"
+      prompt: "Enter the type of instance you want "
+      private: no
+    - name: "sg3"
+      prompt: "Enter the name of the security group"
+      private: no
+    - name: "public_ip3"
+      prompt: "Do you want public IP for app server 1"
+      private: no
+    - name: "ec2_image3"
+      prompt: "Enter image of your EC2 instance"
+      private: no 
+
+  tasks:
+    - name: Creating app server 1
+      include_role: 
+        name: ../roles/ec2
+      vars:
+        instance_name: "{{instance_name3}}"
+        ec2_type: "{{ec2_type3}}"
+        sg: "{{sg3}}"
+        public_ip: "{{public_ip3}}"
+        ec2_subnet_id: "{{ vpc_info.app1_subnet.subnet.id }}"
+        ec2_name: appserver1
+        ec2_image: "{{ec2_image3}}"
+    - name: Print output
+      debug: 
+        var: vpc_info

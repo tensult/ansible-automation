@@ -5,7 +5,7 @@
     name: "{{wb_sg_name}}"
     tags: { "Name":"{{wb_sg_name}}" }
     description: "{{wb_sg_desc}}"
-    vpc_id: "{{ web1_subnet.subnet.vpc_id }}"
+    vpc_id: "{{ vpc.vpc.id }}"
     region: "{{region}}"
     rules:
       - proto: TCP
@@ -13,5 +13,5 @@
         - 80
         - 443
         cidr_ip: 0.0.0.0/0
-        rule_desc: Allow HHTP and HTTPS
+        rule_desc: Allow HTTP and HTTPS
   register: web_sg

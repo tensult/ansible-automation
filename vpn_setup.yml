@@ -1,0 +1,5 @@
+---
+- import_playbook : playbooks/cgw.yml
+- import_playbook : playbooks/vgw.yml
+- import_playbook : playbooks/vpn_connection.yml
+- import_playbook : playbooks/vpn_routetable.yml

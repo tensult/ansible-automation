@@ -1,0 +1,24 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "cidr_block"
+      prompt: "Enter the CIDR block you want"
+      private: no
+    - name: "vpc_name"
+      prompt: "Enter the name of the VPC"
+      private: no
+    - name: "region"
+      prompt: "Enter the region of the VPC"
+      private: no
+    - name: "tag_env"
+      prompt: "Enter the environment tag"
+      private: no
+  tasks:
+    - set_fact:
+        cidr_block: "{{cidr_block}}"
+        vpc_name: "{{vpc_name}}"
+        region: "{{region}}"
+        tag_env: "{{tag_env}}"
+  roles:
+    - ../roles/vpc
+  

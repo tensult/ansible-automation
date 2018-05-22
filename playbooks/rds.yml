@@ -1,0 +1,36 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "db_instance"
+      prompt: "Enter the type of RDS you want (MySQL/Aurora/MariaDB/PostgreSQL/Oracle/Microsoft SQL server)"
+      private: no
+    - name: "db_name"
+      prompt: "Enter the name of your instance"
+      private: no
+    - name: "db_size"
+      prompt: "Enter the size of your instance"
+      private: no
+    - name: "instance_type"
+      prompt: "Enter the instance type"
+      private: no
+    - name: "user_name"
+      prompt: "Enter user name for your database"
+      private: no
+    - name: "db_password"
+      prompt: "Enter the password for your database"
+      private: no
+    - name: "group_name"
+      prompt: "Enter the name of the RDS subnet group "
+      private: no    
+  tasks:
+    - set_fact:
+        db_instance: "{{db_instance}}"
+        db_name: "{{db_name}}"
+        db_size: "{{db_size}}"
+        instance_type: "{{instance_type}}"
+        user_name: "{{user_name}}"
+        db_password: "{{db_password}}"
+        group_name: "{{group_name}}"
+  roles:
+     - ../roles/rds
+  

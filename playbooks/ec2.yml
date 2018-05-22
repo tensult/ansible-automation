@@ -1,0 +1,15 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "key_pair1"
+      prompt: "Enter the name of your keypair"
+      private: no
+        
+  tasks:
+    - set_fact:
+        key_pair1: "{{key_pair1}}"
+
+- import_playbook : ec2_webserver1.yml
+- import_playbook : ec2_webserver2.yml
+- import_playbook : ec2_appserver1.yml
+- import_playbook : ec2_appserver2.yml

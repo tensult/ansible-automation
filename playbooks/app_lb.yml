@@ -1,0 +1,14 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "lb_name"
+      prompt: "Enter the name of the load balancer"
+      private: no
+    
+  tasks:
+    - set_fact:
+         lb_name: "{{lb_name}}"
+        
+  roles:
+     - ../roles/target_groups
+     - ../roles/app_lb

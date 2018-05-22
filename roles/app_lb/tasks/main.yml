@@ -1,0 +1,16 @@
+---
+- name: Creating load balancer for web servers
+  elb_application_lb:
+    name: "{{lb_name}}"
+    region: "{{region}}"
+    security_groups: "{{web_sg.group_id}}"
+    subnets:
+      - "{{ vpc_info.lb1_subnet.subnet.id }}"
+      - "{{ vpc_info.lb2_subnet.subnet.id }}" 
+    listeners:
+      - Protocol: HTTP
+        Port: 80
+        DefaultActions:
+          - Type: forward 
+            TargetGroupName: applbgroup
+    state: present

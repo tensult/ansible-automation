@@ -1,0 +1,18 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "cgw_name"
+      prompt: "Enter the name of the customer gateway"
+      private: no
+    - name: "ip_add"
+      prompt: "Enter the IP address"
+      private: no
+
+  tasks:
+    - set_fact:
+        cgw_name: "{{cgw_name}}"
+        ip_add: "{{ip_add}}"
+
+  roles:
+      - ../roles/cgw
+  
