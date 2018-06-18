@@ -1,6 +1,8 @@
 # AWS automation with Ansible
 
-This playbook installs and configures a three tier architecture for creating a VPC in Amazon Web services. It also sets up a VPN connection with the VPC. It contains a web layer, an application layer and a database layer. There are two EC2 instances running in two different availability zones in the web layer and the same for the application layer as well.
+This playbook installs and configures a three tier architecture for creating a VPC in Amazon Web services. It also sets up a VPN connection with the VPC along with a VPC peering connection. It contains a web layer, an application layer and a database layer. There are two EC2 instances running in two different availability zones in the web layer and the same for the application layer as well.
+
+The playbooks for VPN connection and VPC peering connection have also been provided seperately so that you can run them independently though you have to make same changes in the roles. Before running the playbook for VPC peering connection make sure that you change your AWS config file so as to include the access and secret key in it. Click [here](https://boto3.readthedocs.io/en/latest/guide/configuration.html#aws-config-file) to see the format.
 
 The playbook accepts inputs given by the user such as names, CIDR blocks, tags etc and then builds the VPC in AWS. This is still a work in progress. 
 
@@ -62,3 +64,7 @@ If you don't have it installed follow the steps below in the terminal:
 6) Install boto3
 
     > brew install python
+
+
+
+A sample input file has also been provided so that you can test the code easily though there are some lines you have to enter like the AWS keypair, the VPC peering connection details etc. Make sure to edit the line starting with a '#' symbol and enter the required value.

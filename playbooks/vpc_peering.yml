@@ -1,0 +1,29 @@
+---
+- hosts: local
+  vars_prompt:
+    - name: "connection_name"
+      prompt: "Enter the name of the VPC peering connection"
+      private: no
+    - name: "peer_region"
+      prompt: "Enter the region of the VPC peering connection"
+      private: no
+    - name: "peer_vpc_id"
+      prompt: "Enter the VPC ID of the accepting VPC"
+      private: no
+    - name: "peer_owner_id"
+      prompt: "Enter the AWS account number for cross account peering"
+      private: no
+    - name: "peer_profile"
+      prompt: "Enter the AWS account number for cross account peering"
+      private: no
+  tasks:
+    - set_fact:
+        connection_name: "{{connection_name}}"
+        peer_region: "{{peer_region}}"
+        peer_vpc_id: "{{peer_vpc_id}}"
+        peer_owner_id: "{{peer_owner_id}}" 
+        peer_profile: "{{peer_profile}}"
+  roles:
+       - ../roles/vpc_peering
+       - ../roles/accept_vpc_peering
+  

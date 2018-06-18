@@ -3,6 +3,7 @@
   ec2_vpc_subnet:
         state: present
         vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{region}}"
         az: "{{subnet_az}}"
         cidr: "{{cidr_block}}"
         resource_tags: 

@@ -1,0 +1,8 @@
+---
+- name: Accept peering connection
+  ec2_vpc_peer:
+    region: "{{peer_region}}"
+    peering_id: "{{ vpc_peering.peering_id }}"
+    profile: "{{peer_profile}}"
+    state: accept
+  register: action_peer

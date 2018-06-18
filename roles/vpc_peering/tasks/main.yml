@@ -1,0 +1,12 @@
+---
+- name: Create cross account VPC peering Connection
+  ec2_vpc_peer:
+    region: "{{region}}"
+    vpc_id: "{{ vpc.vpc.id }}"
+    peer_region: "{{peer_region}}"
+    peer_vpc_id: "{{peer_vpc_id}}"
+    peer_owner_id: "{{peer_owner_id}}"
+    state: present
+    tags:
+      Name: "{{connection_name}}" 
+  register: vpc_peering

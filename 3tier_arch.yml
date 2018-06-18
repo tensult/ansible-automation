@@ -10,5 +10,7 @@
 - import_playbook : playbooks/ec2.yml
 - import_playbook : playbooks/app_lb.yml
 - import_playbook : vpn_setup.yml
+- import_playbook : vpc_peering.yml
+
 
 
