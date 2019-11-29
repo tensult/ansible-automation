@@ -1,0 +1,26 @@
+# Ansible playbook for digitalocean instance creation
+---
+- hosts: digitalocean
+  vars:
+    do_tokens: f468ed81fa9e7b27d1707fe82ef4481e79659496fe2677bd571c62542f043fa2 
+  tasks:
+  - name: ensure ssh key exists
+    user: >
+      name={{ 0 }}
+      generate_ssh_key=yes
+      ssh_key_file=.ssh/id_rsah_key_file=.ssh/id_rsa
+  - name: ensure droplet one exists
+    digital_ocean: >
+      state=present
+      command=droplet
+      name=droplet-one
+      size_id=512mb
+      region_id=sgp1
+      image_id=ubuntu-14-04-x64
+      ssh_key_ids={{ my_ssh_key.ssh_key.id }}
+      api_token={{ do_token }}
+    register: droplet_one
+
+  - debug: msg="IP is {{ droplet_one.droplet.ip_address }}"
+
+...
