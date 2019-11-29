@@ -2,7 +2,7 @@
 ---
 - hosts: digitalocean
   vars:
-    do_tokens: f468ed81fa9e7b27d1707fe82ef4481e79659496fe2677bd571c62542f043fa2 
+    do_tokens: <replace-with-your-digitalocean-token> 
   tasks:
   - name: ensure ssh key exists
     user: >
