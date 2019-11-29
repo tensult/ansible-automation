@@ -1,4 +1,5 @@
 ---
+# Refer this for documentation: https://blogs.tensult.com/2019/11/14/automating-wordpress-installation-using-ansible-on-multiple-nodes/
 - name: Wordpress Installation
   hosts: Tensult-wordpressnodes
   become: yes
