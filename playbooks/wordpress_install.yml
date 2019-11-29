@@ -1,0 +1,61 @@
+---
+- name: Wordpress Installation
+  hosts: Tensult-wordpressnodes
+  become: yes
+  vars:
+   wp_mysql_db: wordpress
+   wp_mysql_user: wp-admin
+   wp_mysql_password: tensult
+   wp_mysql_host: "{{ansible_default_ipv4.address}}"
+  tasks:
+  - name: LAMP installation
+    yum: name={{ item }} state=present
+    with_items:
+     - httpd24
+     - mysql-server
+     - php56
+     - php56-mysqlnd
+     - MySQL-python27
+  - name: Removing httpd welcome page from webserver
+    file:
+      path: "/etc/httpd/conf.d/welcome.conf"
+      state: absent
+  - name: Downloading wordpress to document root of remote nodes
+    unarchive:
+      src: http://www.wordpress.org/latest.tar.gz
+      dest: /var/www/html/
+      remote_src: yes
+  - name: Renaming sample wordpress configuration from webserver
+    command: "mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php"
+  - name: Update WordPress config file
+    lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp={{ item.regexp }} line={{ item.line }}
+    with_items:
+      - {'regexp': "define\\( 'DB_NAME', '(database_name_here)+' \\);", 'line': "define('DB_NAME', '{{wp_mysql_db}}');"}
+      - {'regexp': "define\\( 'DB_USER', '(username_here)+' \\);", 'line': "define('DB_USER', '{{wp_mysql_user}}');"}
+      - {'regexp': "define\\( 'DB_PASSWORD', '(password_here)+' \\);", 'line': "define('DB_PASSWORD', '{{wp_mysql_password}}');"}
+      - {'regexp': "define\\( 'DB_HOST', '(localhost)+' \\);", 'line': "define('DB_HOST', '{{wp_mysql_host}}');"}
+  - name: Update default Apache site
+    lineinfile:
+     dest=/etc/httpd/conf/httpd.conf
+     line="DocumentRoot /var/www/html/wordpress"
+  - name: Starting the mysqld service
+    service:
+     name: mysqld
+     state: started
+  - name: Creating database for wordpress
+    mysql_db:
+      name: "{{wp_mysql_db}}"
+      state: present
+  - name: Creating user for wordpress and allow all permissions to db wordpress
+    mysql_user:
+      name: "{{wp_mysql_user}}"
+      password: "{{wp_mysql_password}}"
+      host: '%'
+      priv: '*.*:ALL'
+      state: present
+  - name: starting httpd and mysqld
+    service: name={{ item }} state=restarted
+    with_items:
+     - httpd
+     - mysqld
+...
