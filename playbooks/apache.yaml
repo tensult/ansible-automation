@@ -1,0 +1,10 @@
+---
+- hosts: Dev
+  become: yes
+  tasks:
+    - name: Installing apache on ubuntu
+      apt: name=apache2 state=present
+      when: ansible_os_family == "Debian"
+    - name: Installing apache on centos
+      yum: name=httpd state=present
+      when: ansible_os_family == "RedHat"
